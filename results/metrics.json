@@ -1,0 +1,7 @@
+{
+  "accuracy": 0.907,
+  "balanced_accuracy": 0.9265,
+  "majority_class_baseline_accuracy": 0.809,
+  "n_train": 4000,
+  "n_test": 1000
+}

@@ -1,0 +1,8 @@
+                                  precision    recall  f1-score   support
+
+      low/moderate proneness (0)     0.6828    0.9581    0.7974       191
+elevated or higher proneness (1)     0.9891    0.8949    0.9396       809
+
+                        accuracy                         0.9070      1000
+                       macro avg     0.8360    0.9265    0.8685      1000
+                    weighted avg     0.9306    0.9070    0.9125      1000
