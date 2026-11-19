@@ -16,7 +16,7 @@ The classes are imbalanced (4,043 samples in class 1 vs. 957 in class 0), so acc
 ## Data
 
 - 5,000 records, 10 columns: `Name`, `Age`, `Gender`, `Marital_Status`, `Fatigue`, `Slowing`, `Pain`, `Hygiene`, `Movement`, `Schizophrenia`.
-- Source: Kaggle, "Schizophrenia Symptoms" dataset by Shreeya Gupta (find it on kaggle.com by title and author).
+- Source: Kaggle, "Schizophrenia Symptoms" dataset by Shreeya Gupta (https://www.kaggle.com/datasets/shree23yaa/schizophrenia-symptoms).
 - **License:** no license is specified on the dataset's Kaggle page, so the data is not redistributed with this repository. The code and the aggregated results (metrics and plots in `results/`) are the only things published here.
 - To reproduce the results, download the CSV from Kaggle yourself, put it into `data/` as `SchizophreniaSymptomnsData.csv` (or pass the path with `--data`).
 
