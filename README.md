@@ -1,6 +1,39 @@
 # k-NN Classification of Schizophrenia Proneness
 
-Binary classification of schizophrenia proneness from demographic and symptom indicators using k-nearest neighbors (scikit-learn). Originally a university coursework project on classification algorithms for medical data.
+Binary classification of schizophrenia proneness from demographic and symptom indicators using k-nearest neighbors (scikit-learn). Originally a university coursework project on classification algorithms for medical data. The main result: the original 96% accuracy came from data leakage, and the honest, leakage-free estimate is about 91%.
+
+## How to run
+
+The dataset is not included (see [Data](#data)): download the CSV from Kaggle first and put it into `data/` as `SchizophreniaSymptomnsData.csv` (or pass the path with `--data`).
+
+```bash
+pip install -r requirements.txt
+python eda.py                 # plots and tables to results/eda/
+python main.py                # train with k=3, evaluate, save results to results/
+python main.py --tune --k 11  # cross-validate k first, then evaluate with k=11
+```
+
+## Results
+
+Test set: 1,000 samples (20% stratified split, original class distribution: 809 in class 1, 191 in class 0).
+
+| Model | Accuracy | Balanced accuracy | Recall, class 0 | Recall, class 1 |
+|---|---|---|---|---|
+| Majority-class baseline | 0.809 | 0.500 | 0.000 | 1.000 |
+| k-NN, k=3 (as in the original coursework) | 0.915 | 0.914 | 0.911 | 0.916 |
+| k-NN, k=15 (chosen by 5-fold CV on the training set) | 0.907 | 0.927 | 0.958 | 0.895 |
+
+- Cross-validated balanced accuracy grows from 0.870 (k=1) to about 0.92 (k=15-21) and then flattens, see `results/k_search.png`.
+- The original coursework reported 96% accuracy. That number came from SMOTE and scaling applied before the train/test split. With a leakage-free pipeline the honest estimate is about 91% accuracy (balanced accuracy 0.91-0.93).
+- Precision for class 0 is lower (0.68-0.72) because SMOTE shifts the decision boundary towards the minority class: the model catches most class 0 cases but also flags some class 1 samples as class 0.
+
+![Confusion matrix](results/confusion_matrix.png)
+
+## About the author
+
+I am a Data Science student looking for a remote junior / internship role in data analysis or data science.
+
+**CV (PDF):** [PASTE_YOUR_CV_LINK_HERE](PASTE_YOUR_CV_LINK_HERE) · **LinkedIn:** [PASTE_YOUR_LINKEDIN_LINK_HERE](PASTE_YOUR_LINKEDIN_LINK_HERE) · **GitHub:** [semiautomatic2](https://github.com/semiautomatic2)
 
 ## Problem
 
@@ -36,31 +69,6 @@ The classes are imbalanced (4,043 samples in class 1 vs. 957 in class 0), so acc
 ### Why the split comes first
 
 Doing imputation, scaling and SMOTE on the whole dataset before splitting leaks information into the test set: synthetic SMOTE samples are built from neighbors that can end up on either side of the split, and k-NN then "finds" near-copies of test points in the training data. This inflates accuracy. Here every step is fitted inside a pipeline on the training data only, and SMOTE is never applied to the test set.
-
-## How to run
-
-```bash
-pip install -r requirements.txt
-python eda.py                 # plots and tables to results/eda/
-python main.py                # train with k=3, evaluate, save results to results/
-python main.py --tune --k 11  # cross-validate k first, then evaluate with k=11
-```
-
-## Results
-
-Test set: 1,000 samples (20% stratified split, original class distribution: 809 in class 1, 191 in class 0).
-
-| Model | Accuracy | Balanced accuracy | Recall, class 0 | Recall, class 1 |
-|---|---|---|---|---|
-| Majority-class baseline | 0.809 | 0.500 | 0.000 | 1.000 |
-| k-NN, k=3 (as in the original coursework) | 0.915 | 0.914 | 0.911 | 0.916 |
-| k-NN, k=15 (chosen by 5-fold CV on the training set) | 0.907 | 0.927 | 0.958 | 0.895 |
-
-- Cross-validated balanced accuracy grows from 0.870 (k=1) to about 0.92 (k=15-21) and then flattens, see `results/k_search.png`.
-- The original coursework reported 96% accuracy. That number came from SMOTE and scaling applied before the train/test split. With a leakage-free pipeline the honest estimate is about 91% accuracy (balanced accuracy 0.91-0.93).
-- Precision for class 0 is lower (0.68-0.72) because SMOTE shifts the decision boundary towards the minority class: the model catches most class 0 cases but also flags some class 1 samples as class 0.
-
-![Confusion matrix](results/confusion_matrix.png)
 
 ## Project structure
 
