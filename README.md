@@ -29,11 +29,6 @@ Test set: 1,000 samples (20% stratified split, original class distribution: 809 
 
 ![Confusion matrix](results/confusion_matrix.png)
 
-## About the author
-
-I am a Data Science student looking for a remote junior / internship role in data analysis or data science.
-
-**CV (PDF):** [PASTE_YOUR_CV_LINK_HERE](PASTE_YOUR_CV_LINK_HERE) · **LinkedIn:** [PASTE_YOUR_LINKEDIN_LINK_HERE](PASTE_YOUR_LINKEDIN_LINK_HERE) · **GitHub:** [semiautomatic2](https://github.com/semiautomatic2)
 
 ## Problem
 
